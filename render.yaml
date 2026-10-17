@@ -2,14 +2,10 @@ services:
   - type: web
     name: modelagem-antunes
     runtime: docker
-    plan: 1c-2g
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /api/models
-    disk:
-      name: modelo-a3-data
-      mountPath: /var/data
-      sizeGB: 1
     envVars:
       - key: MODEL_STORAGE_DIR
         value: /var/data
