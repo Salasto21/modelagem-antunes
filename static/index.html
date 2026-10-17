@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eeeFE8" />
+    <title>Modelo — espaço 3D A3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css?v=lighting-1" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="/static/app.js?v=lighting-1"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Modelo, início">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>MODELO<span class="brand-period">.</span></span>
+      </a>
+      <div class="project-name"><span class="project-chip">A3</span> ESPAÇO DE MODELOS</div>
+      <div class="top-actions">
+        <div class="connection" id="connection"><span class="connection-dot"></span><span id="connection-label">CONECTANDO</span></div>
+        <button class="github-button" id="github-open" type="button"><span aria-hidden="true">↗</span> GitHub</button>
+        <label class="upload-button" for="model-upload"><span aria-hidden="true">＋</span> Enviar arquivo</label>
+        <input id="model-upload" type="file" accept=".blend,.blend1,.glb,model/gltf-binary" hidden />
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="library">
+        <div class="library-title">
+          <div><p class="eyebrow">ARQUIVOS COMPARTILHADOS</p><h1>Biblioteca</h1></div>
+          <span class="file-count" id="file-count">00</span>
+        </div>
+        <div class="library-columns"><span>MODELO</span><span>TAMANHO</span></div>
+        <div class="file-list" id="file-list" aria-live="polite"></div>
+        <div class="library-empty" id="library-empty">
+          <span class="empty-symbol" aria-hidden="true">◇</span>
+          <p>Nenhum arquivo ainda.</p>
+          <label for="model-upload">Enviar .blend ou .glb</label>
+        </div>
+        <div class="library-footer">
+          <div class="sync-line"><span class="sync-arrows" aria-hidden="true">↻</span><strong>Sincronização ao vivo</strong><span class="small-dot"></span></div>
+          <p>Quando alguém envia ou atualiza um modelo, ele aparece para todos conectados.</p>
+          <div class="format-note"><span>FORMATOS ACEITOS</span><b>BLEND · GLB · 250 MB</b></div>
+        </div>
+      </aside>
+
+      <section class="editor" aria-label="Área de visualização dos modelos 3D">
+        <div class="editor-bar">
+          <div class="editor-title"><span class="eyebrow">ÁREA DE EDIÇÃO</span><strong>Visualizadores <span>04</span></strong></div>
+          <div class="editor-legend"><span class="legend-key"></span> VISUALIZAÇÃO 3D <span class="legend-separator"></span> ARRASTE PARA ORBITAR</div>
+        </div>
+        <div class="viewport-grid" id="viewport-grid">
+          <section class="viewport" data-slot="0" aria-label="Visualizador 1">
+            <header class="viewport-header"><div class="viewport-heading"><span class="slot-number">01</span><span class="slot-name">MODELO 01</span></div><div class="slot-controls"><select class="model-select" aria-label="Selecionar modelo para o visualizador 1"><option value="">Selecionar arquivo</option></select><button class="load-button" type="button" title="Carregar arquivo selecionado"><span aria-hidden="true">▷</span><span>Carregar</span></button><button class="fullscreen-button" type="button" title="Abrir em tela cheia" aria-label="Abrir visualizador 1 em tela cheia">⛶</button><button class="reset-button" title="Centralizar câmera" aria-label="Centralizar câmera">⌖</button></div></header>
+            <div class="viewport-canvas"><div class="viewport-gridlines"></div><div class="placeholder"><span class="placeholder-icon">◇</span><span>Arraste um modelo da biblioteca</span></div><div class="viewport-loading" hidden><span></span> CARREGANDO</div></div>
+            <footer class="viewport-footer"><span class="current-model">SEM MODELO</span><span class="orbit-label">ÓRBITA LIVRE</span></footer>
+          </section>
+          <section class="viewport" data-slot="1" aria-label="Visualizador 2">
+            <header class="viewport-header"><div class="viewport-heading"><span class="slot-number">02</span><span class="slot-name">MODELO 02</span></div><div class="slot-controls"><select class="model-select" aria-label="Selecionar modelo para o visualizador 2"><option value="">Selecionar arquivo</option></select><button class="load-button" type="button" title="Carregar arquivo selecionado"><span aria-hidden="true">▷</span><span>Carregar</span></button><button class="fullscreen-button" type="button" title="Abrir em tela cheia" aria-label="Abrir visualizador 2 em tela cheia">⛶</button><button class="reset-button" title="Centralizar câmera" aria-label="Centralizar câmera">⌖</button></div></header>
+            <div class="viewport-canvas"><div class="viewport-gridlines"></div><div class="placeholder"><span class="placeholder-icon">◇</span><span>Arraste um modelo da biblioteca</span></div><div class="viewport-loading" hidden><span></span> CARREGANDO</div></div>
+            <footer class="viewport-footer"><span class="current-model">SEM MODELO</span><span class="orbit-label">ÓRBITA LIVRE</span></footer>
+          </section>
+          <section class="viewport" data-slot="2" aria-label="Visualizador 3">
+            <header class="viewport-header"><div class="viewport-heading"><span class="slot-number">03</span><span class="slot-name">MODELO 03</span></div><div class="slot-controls"><select class="model-select" aria-label="Selecionar modelo para o visualizador 3"><option value="">Selecionar arquivo</option></select><button class="load-button" type="button" title="Carregar arquivo selecionado"><span aria-hidden="true">▷</span><span>Carregar</span></button><button class="fullscreen-button" type="button" title="Abrir em tela cheia" aria-label="Abrir visualizador 3 em tela cheia">⛶</button><button class="reset-button" title="Centralizar câmera" aria-label="Centralizar câmera">⌖</button></div></header>
+            <div class="viewport-canvas"><div class="viewport-gridlines"></div><div class="placeholder"><span class="placeholder-icon">◇</span><span>Arraste um modelo da biblioteca</span></div><div class="viewport-loading" hidden><span></span> CARREGANDO</div></div>
+            <footer class="viewport-footer"><span class="current-model">SEM MODELO</span><span class="orbit-label">ÓRBITA LIVRE</span></footer>
+          </section>
+          <section class="viewport" data-slot="3" aria-label="Visualizador 4">
+            <header class="viewport-header"><div class="viewport-heading"><span class="slot-number">04</span><span class="slot-name">MODELO 04</span></div><div class="slot-controls"><select class="model-select" aria-label="Selecionar modelo para o visualizador 4"><option value="">Selecionar arquivo</option></select><button class="load-button" type="button" title="Carregar arquivo selecionado"><span aria-hidden="true">▷</span><span>Carregar</span></button><button class="fullscreen-button" type="button" title="Abrir em tela cheia" aria-label="Abrir visualizador 4 em tela cheia">⛶</button><button class="reset-button" title="Centralizar câmera" aria-label="Centralizar câmera">⌖</button></div></header>
+            <div class="viewport-canvas"><div class="viewport-gridlines"></div><div class="placeholder"><span class="placeholder-icon">◇</span><span>Arraste um modelo da biblioteca</span></div><div class="viewport-loading" hidden><span></span> CARREGANDO</div></div>
+            <footer class="viewport-footer"><span class="current-model">SEM MODELO</span><span class="orbit-label">ÓRBITA LIVRE</span></footer>
+          </section>
+        </div>
+        <footer class="editor-footer"><span><i class="footer-indicator"></i> 4 ESPAÇOS INDEPENDENTES</span><span>BLEND E GLB · PRÉVIA 3D</span></footer>
+      </section>
+    </main>
+    <dialog class="github-dialog" id="github-dialog">
+      <form id="github-form">
+        <div class="dialog-heading"><div><p class="eyebrow">REPOSITÓRIO PÚBLICO</p><h2>Importar do GitHub</h2></div><button class="dialog-close" id="github-close" type="button" aria-label="Fechar">×</button></div>
+        <label class="url-label" for="github-url">Link do arquivo .blend ou .glb</label>
+        <input class="url-input" id="github-url" type="url" placeholder="https://github.com/usuario/repo/blob/main/modelo.blend" required />
+        <p class="dialog-note">O repositório precisa ser público. O arquivo é conferido automaticamente a cada 5 segundos.</p>
+        <div class="dialog-actions"><button class="cancel-button" id="github-cancel" type="button">Cancelar</button><button class="upload-button" type="submit">Importar arquivo</button></div>
+      </form>
+    </dialog>
+    <div class="file-drop-overlay" id="file-drop-overlay" aria-hidden="true"><span class="drop-icon">↓</span><strong>Solte o arquivo aqui</strong><span>BLEND · BLEND1 · GLB</span></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
