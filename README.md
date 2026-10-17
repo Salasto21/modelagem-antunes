@@ -2,6 +2,8 @@
 
 Espaço compartilhado para receber projetos `.blend` e modelos `.glb`, com até quatro visualizadores 3D independentes. A biblioteca é comum a todos os navegadores conectados: arquivos novos e versões substituídas são anunciados por WebSocket e aparecem em tempo real.
 
+O repositório `modelagem-antunes` contém o código do site, o frontend e as configurações para publicação.
+
 ## Iniciar no Windows
 
 ```powershell
@@ -25,7 +27,7 @@ Cada painel tem seleção e câmera próprias. Escolha um arquivo no menu e cliq
 
 ## Publicar com HTTPS
 
-O GitHub guarda o código; o Render executa o Docker, Python e Blender. Crie o repositório `modelagem-antunes` no GitHub e envie estes arquivos, depois no Render escolha **New > Blueprint** e conecte esse repositório. O Render usa `render.yaml`, publica o serviço em uma URL `https://modelagem-antunes.onrender.com` (se o nome estiver disponível) e faz novo deploy quando houver atualizações no GitHub.
+O GitHub guarda o código; o Render executa o Docker, Python e Blender. O código está no repositório `Salasto21/modelagem-antunes`. No Render, escolha **New > Blueprint** e conecte esse repositório. O Render usa `render.yaml`, publica o serviço em uma URL `https://modelagem-antunes.onrender.com` (se o nome estiver disponível) e faz novo deploy quando houver atualizações no GitHub.
 
 O Blueprint reserva um disco persistente de 1 GB e um plano de 1 CPU/2 GB para o Blender. Esses recursos são pagos no Render. O `.dockerignore` exclui `models/` e `data/`; depois que o deploy estiver no ar, envie novamente o `.blend` pelo site para ele ficar no disco online.
 

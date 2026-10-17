@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consumir API REST</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; }
+      fieldset { margin-bottom: 20px; padding: 16px; }
+      label { display: block; margin: 8px 0 4px; }
+      input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+      button { margin-top: 12px; padding: 10px 16px; }
+      ul { padding-left: 20px; }
+      li { margin-bottom: 10px; }
+    </style>
+  </head>
+  <body>
+    <h1>Front-end simples para API REST</h1>
+
+    <fieldset>
+      <legend>Adicionar rotina</legend>
+      <form id="routine-form">
+        <label for="title">Título</label>
+        <input id="title" name="title" required />
+
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" rows="3" required></textarea>
+
+        <label for="time">Horário</label>
+        <input id="time" name="time" required />
+
+        <button type="submit">Salvar rotina</button>
+      </form>
+    </fieldset>
+
+    <fieldset>
+      <legend>Adicionar exame</legend>
+      <form id="exam-form">
+        <label for="exam-type">Tipo</label>
+        <input id="exam-type" name="type" required />
+
+        <label for="result">Resultado</label>
+        <input id="result" name="result" required />
+
+        <label for="notes">Observações</label>
+        <textarea id="notes" name="notes" rows="2"></textarea>
+
+        <button type="submit">Salvar exame</button>
+      </form>
+    </fieldset>
+
+    <section>
+      <h2>Rotinas</h2>
+      <ul id="routines-list"></ul>
+    </section>
+
+    <section>
+      <h2>Exames</h2>
+      <ul id="exams-list"></ul>
+    </section>
+
+    <script>
+      const apiBase = 'http://localhost:8000';
+
+      async function fetchJson(url, options) {
+        const resp = await fetch(url, options);
+        if (!resp.ok) {
+          const err = await resp.text();
+          throw new Error(err || resp.statusText);
+        }
+        return resp.json();
+      }
+
+      async function loadRoutines() {
+        const routines = await fetchJson(apiBase + '/routines');
+        const list = document.getElementById('routines-list');
+        list.innerHTML = routines.map(r => `<li><strong>${r.title}</strong> (${r.time})<br>${r.description}</li>`).join('') || '<li>Nenhuma rotina encontrada.</li>';
+      }
+
+      async function loadExams() {
+        const exams = await fetchJson(apiBase + '/exams');
+        const list = document.getElementById('exams-list');
+        list.innerHTML = exams.map(e => `<li><strong>${e.type}</strong>: ${e.result}<br>${e.notes || 'Sem observações'}</li>`).join('') || '<li>Nenhum exame encontrado.</li>';
+      }
+
+      document.getElementById('routine-form').addEventListener('submit', async event => {
+        event.preventDefault();
+        const form = event.target;
+        const data = {
+          title: form.title.value,
+          description: form.description.value,
+          time: form.time.value,
+        };
+        await fetchJson(apiBase + '/routines', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        form.reset();
+        loadRoutines();
+      });
+
+      document.getElementById('exam-form').addEventListener('submit', async event => {
+        event.preventDefault();
+        const form = event.target;
+        const data = {
+          type: form.type.value,
+          result: form.result.value,
+          notes: form.notes.value,
+        };
+        await fetchJson(apiBase + '/exams', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        form.reset();
+        loadExams();
+      });
+
+      loadRoutines();
+      loadExams();
+    </script>
+  </body>
+</html>
